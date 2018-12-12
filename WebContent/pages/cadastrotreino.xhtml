@@ -115,7 +115,7 @@
 
 					<p:spacer />
 
-					<p:panelGrid columns="5" style="text-align: center;"
+					<p:panelGrid columns="6" style="text-align: center;"
 						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
 						layout="grid" styleClass="ui-fluid  ">
 
@@ -147,6 +147,10 @@
 							<p:commandButton value="Consultar" styleClass="btn-primary btn-block"
 							actionListener="#{treinoController.consultar}"
 							update="@form formDados" process="@this" />
+							
+							<p:commandButton value="Imprimir" styleClass="btn-primary btn-block"
+							actionListener="#{treinoController.imprimirRelatorio}"
+							update="@form" process="@this" />
 							
 					</p:panelGrid>
 

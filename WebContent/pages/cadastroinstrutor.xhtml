@@ -134,7 +134,7 @@
 								<p:column headerText="Nome">
 									<p:commandLink value="#{pessoa.nome}" 
 											oncomplete="PF('dlg').hide();">
-										<f:ajax render="formDados" execute="@this"  update="itNome"/>
+										<f:ajax render="formDados" execute="@this"  update="formDados"/>
 										<f:setPropertyActionListener value="#{pessoa}"
 											target="#{instrutorController.entity.pessoaFisica}" />
 											
@@ -148,8 +148,8 @@
 									</h:outputText>
 								</p:column>
 			
-								<p:column headerText="Endereço">
-									<h:outputText value="#{pessoa.endereco}" />
+								<p:column headerText="CPF">
+									<h:outputText value="#{pessoa.cpf}" />
 								</p:column>
 			
 								<p:column headerText="Email">

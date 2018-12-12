@@ -4,6 +4,7 @@ body {
 
 .sidebar {
 	grid-area: sidebar;
+	color:black;
 }
 
 .content {
@@ -51,7 +52,7 @@ body {
 }
 
 .box {
-	/* background-color: #444; */
+	background-color: #ECE0F8; 
 	border-radius: 0px;
 	padding: 0px;
 	font-size: 150%;
@@ -60,15 +61,15 @@ body {
 }
 
 .header {
-	color: #FFF;
-	background-color: rgb(98, 129, 177);
+	color: #001;
+	background-color: #ECE0F8;
 	vertical-align: middle;
 	text-align: center;
 	height: 100px;
 }
 
 .footer {
-	background-color: white; 
+	background-color: #ECE0F8; 
 	height: 50px;
 	text-align: center;
 	vertical-align: middle;

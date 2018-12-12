@@ -59,7 +59,7 @@ a:focus {
 a.button { 
     background-color: #D20000;
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #000;
     display: inline-block;
     font-weight: bold;
     padding: 8px 22px;
@@ -70,7 +70,7 @@ a.button {
 }
 
 a.button-reversed { 
-    background-color: #333;
+    background-color: #334;
 }
 
 fieldset {
@@ -114,6 +114,7 @@ border:none;
 }
 h1 {
 	font-size:2.4em;
+	color:#000
 }
 h2 {
 	color:#2f2f2f;
@@ -142,6 +143,7 @@ ul, ol {
 }
 li {
 	padding-bottom:5px;
+	color:#000;
 }
 
 
@@ -171,7 +173,7 @@ header h1 {
 header h1 a,
 header h1 a:hover,
 header h1 a:visited {
-	color: #fff;
+	color: #000;
 	text-decoration: none;
 }
 
@@ -185,7 +187,7 @@ header h2 {
 	text-transform: uppercase;
 }
 header div.tagline {
-	color:#C2D7F9;
+	color:#D5D76;
 	font-size:0.9em;
 }
 header div.tagline a {
@@ -205,7 +207,7 @@ section#body {
 section#content {
 	width:580px;
 	padding: 20px;
-	background-color: #fff;
+	background-color: #000;
 }
 .column-left {
 	float:left;
@@ -234,15 +236,15 @@ nav#mainnav li.selected-item a,
 nav#mainnav li.selected-item a:hover {
 	color:#fff;
 	font-weight:bold;
-	background: #D20000;
+	background: #000;
 }
 nav#mainnav li a:hover {
-	background:#292929;
+	background:#000;
 	color: #eee;
 	text-decoration:none;
 }
 nav#mainnav li a {
-	color: #ccc;
+	color: #000;
 	display: block;
 	padding: 22px 17px;
 	text-align: center;
@@ -274,14 +276,14 @@ article h2 {
 }
 
 article .article-info {
-  color: #CCC;
+  color: #000;
 font-size: 0.8em;
 padding: 0px 0px 10px;
 text-transform: uppercase;
 }
 
 article .article-info a { 
-	color: #ccc;
+	color: #000;
 }
 
 
@@ -292,13 +294,13 @@ footer {
 }
 
 footer p {
-	color:#666;
+	color:#000;
 	margin:0;
 	font-size:0.8em;
 	text-align: center;
 }
 footer p a {
-	color:#666;
+	color:#000;
 	font-weight:bold;
 	text-decoration:none;
 	border-bottom:1px solid #999;

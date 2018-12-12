@@ -8,6 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import br.unitins.webgyn.repository.ExercicioRepository;
 import br.unitins.webgyn.model.Treino;
+import br.unitins.webgyn.application.Util;
 import br.unitins.webgyn.model.DiasSemana;
 import br.unitins.webgyn.model.Exercicio;
 import br.unitins.webgyn.repository.TreinoRepository;
@@ -125,11 +126,22 @@ public class TreinoController extends Controller<Treino>  {
 	
 	public void consultar() {
 		TreinoRepository repository = new TreinoRepository(getEntityManager());
-		//getListaTreino().addAll(repository.getTreinosDia(DiasSemana.SEGUNDA));
+		//getListaTreino().addAll(repository.getTreinosDia(getEntity().getDia()));
 		getListaTreino().addAll(repository.getTreinos(getEntity().getAluno().getId(),getEntity().getDia()));
 	    
 		if(getListaTreino().get(0)!=null)
 			setEntity(getListaTreino().get(0));
+		
+	}
+	
+	public void imprimirRelatorio() {
+		if(getEntity()==null || getEntity().getAluno() == null) {
+			Util.redirect("/WebGym/FichaReport?NomeAluno=");
+		}else {
+			
+			Util.redirect("/WebGym/FichaReport?NomeAluno="+getEntity().getAluno().getNome());
+			
+		}
 		
 	}
 

@@ -13,13 +13,13 @@
 
 
 
-<h:body>
+<h:body style="color:blue">
 	
 	 <div class="wrapper">
 	 	<div class="box header">
 			<h1 >Sistema WEBGYM</h1>
 			 <div style="text-align: right;">
-				<h:form>
+				<h:form >
 					<h:outputLabel value="Olá #{templateController.usuarioLogado.login}"/>
 					<h:commandLink value=" (Sair)" 
 						action="#{templateController.encerrarSessao}"
@@ -32,9 +32,9 @@
 			<ul>
 				<li class="selected-item"><a>Início</a></li>	
 				<li><a href="/WebGym/pages/cadastrocidade.xhtml">Cadastrar cidade</a></li>	
-				<li><a href="/WebGym/pages/cadastropessoafisica.xhtml">Cadastrar(Aluno/instrutor)</a></li>
-				<li><a href="/WebGym/pages/cadastroaluno.xhtml">Alunos</a></li>
-				<li><a href="/WebGym/pages/cadastroinstrutor.xhtml">Instrutor</a></li>
+				<li><a href="/WebGym/pages/cadastropessoafisica.xhtml">Cadastrar Pessoa</a></li>
+				<li><a href="/WebGym/pages/cadastroaluno.xhtml">Cadastro Aluno</a></li>
+				<li><a href="/WebGym/pages/cadastroinstrutor.xhtml">Cadastro Instrutor</a></li>
 				<li><a href="/WebGym/pages/cadastrotreino.xhtml">Treino</a></li>
 				<li><a href="/WebGym/pages/cadastroavaliacao.xhtml">Avaliação</a></li>
 				<li><a href="/WebGym/pages/cadastromensalidade.xhtml">Mensalidade</a></li>

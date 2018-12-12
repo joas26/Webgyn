@@ -40,8 +40,9 @@ public class TreinoRepository extends Repository<Treino> {
 	@SuppressWarnings("unchecked")
 	public List<Treino> getTreinos(Integer id, DiasSemana dia) {
 		Query query = getEntityManager().
-				createQuery("SELECT * FROM treinoaluno a inner join treino t on t.id=a.idtreino WHERE a.idaluno = :id and t.dia = :dia ORDER BY a.idtreino");
-		
+				//createQuery("SELECT * FROM treinoaluno a inner join treino t on t.id = a.idtreino WHERE a.idaluno=:id and t.dia=:dia");
+				createQuery("select treino.dia, aluno.idaluno\r\n" + 
+						"from treino, (select idtreino, idaluno from treinoaluno where treinoaluno.idaluno=:id) as aluno where treino.id =aluno.idtreino and treino.dia=:dia ");
 		
 		query.setParameter("id", id);
 		query.setParameter("dia", dia);
