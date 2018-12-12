@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<ui:composition template="/template.xhtml">
+		<ui:define name="conteudo">
+			<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+			 
+			<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+			    <p:graphicImage name="/images/loading.gif" />
+			</p:dialog>
+			<div style="position: absolute; top: 100px; left: 80%" >
+				<p:growl autoUpdate="true" />
+			</div>
+			<h2 class="align-center">.: Cadastro de Pessoa :.</h2>
+			<div class="ui-g-12">
+				<p:panel styleClass="card no-border" toggleable="true"
+					toggleSpeed="300">
+		
+					<h:form id="formDados">
+						
+						<div style="text-align: left;"
+							class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
+							<p:panelGrid id="pgDados" columns="2"
+								columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+								styleClass="ui-fluid card">
+								
+								<h:panelGroup>
+									<p:commandLink for="itNome" 
+											value="Nome:" 
+											onclick="PF('dlg').show();"
+											process="@this"
+											style="color:blue; text-decoration: underline;"/>
+											
+									<p:inputText id="itNome" value="#{pessoaFisicaController.entity.nome}" required="true">
+										<p:focus for="itNome" />								
+									</p:inputText>
+									
+									<p:outputLabel value="CPF:" />
+									<p:inputMask mask="999-999-999-99" value="#{pessoaFisicaController.entity.cpf}" ></p:inputMask>
+									<p:outputLabel value="Data de Nascimento:" />
+									<p:calendar value="#{pessoaFisicaController.entity.dataNascimento}"
+										pattern="dd/MM/yyyy" mask="true" locale="pt_BR" />
+										
+								    <p:outputLabel value="Email:" />
+									<p:inputText id="itEmail" value="#{pessoaFisicaController.entity.email}" />
+								</h:panelGroup>
+							
+		
+								
+		
+								<h:panelGroup>
+									<p:outputLabel value="Endereco:" />
+									
+									<p:outputLabel value="logradouro:" />
+									<p:inputText value="#{pessoaFisicaController.entity.endereco.logradouro}" />
+									
+	
+									<p:outputLabel value="Numero:" />
+									<p:inputText value="#{pessoaFisicaController.entity.endereco.numero}" />
+									
+									<p:outputLabel value="CEP:" />
+									<p:inputMask mask="99999-999" value="#{pessoaFisicaController.entity.endereco.cep.cep}" maxlength="8" ></p:inputMask>
+									
+									
+									<p:outputLabel value="Bairro:" />
+									<p:inputText value="#{pessoaFisicaController.entity.endereco.cep.bairro}" />
+
+									
+								</h:panelGroup>
+								
+								
+							
+								
+								<h:panelGroup>
+									<p:commandLink 
+											value="Cidade:" 
+											process="@this"
+											actionListener="#{pessoaFisicaController.abrirListagemCidade}"
+											style="color:blue; text-decoration: underline;">
+											
+											<p:ajax event="dialogReturn" 
+											        listener="#{pessoaFisicaController.cidadeSelecionada}" 
+											        update="campoCidadeNatal campoEstado" />
+											
+									</p:commandLink>
+									<p:inputText value="#{pessoaFisicaController.entity.cidadeNatal.nome}"
+											placeholder="Selecione a cidade ...." 
+											disabled="true"
+											id="campoCidadeNatal"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<p:outputLabel value="Estado:" />
+									<p:inputText
+										id="campoEstado" 
+										value="#{pessoaFisicaController.entity.cidadeNatal.estado}" 
+										disabled="true"/>
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:panelGrid id="panelTelefone" columns="2" columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
+										
+										<h:panelGroup>
+											<p:outputLabel value="DDD:" />
+											<p:inputText value="#{pessoaFisicaController.telefone.codigoArea}" maxlength="2" />
+										</h:panelGroup>
+											
+										<h:panelGroup>			
+												<p:outputLabel value="Número:" />
+												<p:inputText value="#{pessoaFisicaController.telefone.numero}" maxlength="9"/>
+										</h:panelGroup>	
+											
+									</h:panelGrid>
+									
+									<h:panelGroup>
+										<p:spacer />
+										<p:commandButton value="Adicionar" 
+											actionListener="#{pessoaFisicaController.adicionarTelefone}"
+											update="panelTelefone dtTelefone"
+											process="@this panelTelefone"/>
+									</h:panelGroup>
+								</h:panelGroup>
+								<h:panelGroup>
+									<p:dataTable id="dtTelefone" styleClass="box-primary" var="tel"
+										value="#{pessoaFisicaController.entity.listaTelefone}">
+										<f:facet name="header">
+											<h:outputText value="Lista de Telefones" />
+										</f:facet>
+										<p:column headerText="DDD">
+											<h:outputText value="#{tel.codigoArea}" />
+										</p:column>
+										<p:column headerText="Número">
+											<h:outputText value="#{tel.numero}" />
+										</p:column>	
+										<p:column>
+											<p:commandLink value="Remover" 
+													actionListener="#{pessoaFisicaController.removerTelefone(tel)}" 
+													update="dtTelefone" process="@this"/>
+										</p:column>	
+									</p:dataTable>
+															
+								</h:panelGroup>
+								<p:spacer />
+							</p:panelGrid>
+						</div>
+						
+		
+						<p:spacer />
+		
+						<p:panelGrid columns="4" style="text-align: center;"
+							columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+							layout="grid" styleClass="ui-fluid  ">
+		
+							<p:commandButton value="Incluir" styleClass="btn-primary btn-block"
+								disabled="#{pessoaFisicaController.entity.id != null}"
+								actionListener="#{pessoaFisicaController.incluir}"
+								update="@form formDataTable" process="@this pgDados" />
+		
+							<p:commandButton value="Alterar" styleClass="btn-primary btn-block"
+								disabled="#{pessoaFisicaController.entity.id == null}"
+								actionListener="#{pessoaFisicaController.alterar}"
+								update="@form formDataTable" process="@this pgDados" />
+		
+							<p:commandButton value="Excluir" styleClass="btn-primary btn-block"
+								disabled="#{pessoaFisicaController.entity.id == null}"
+								actionListener="#{pessoaFisicaController.remover}"
+								update="@form formDataTable" process="@this pgDados">
+								<p:confirm header="Confirmação" 
+											message="Deseja realmente excluir?" 
+											icon="ui-icon-alert" />
+							</p:commandButton>
+
+							<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
+								actionListener="#{pessoaFisicaController.limpar}"
+								update="@form formDataTable" process="@this" />
+						</p:panelGrid>
+		
+
+		
+					</h:form>
+		
+				</p:panel>
+				<p:spacer />
+				
+				<p:dialog header="Pesquisa de Pessoas" appendTo="@(body)" widgetVar="dlg" modal="true" height="400" closeOnEscape="true"  >
+					<h:form>
+						<p:inputText id="itPesquisa" value="#{pessoaFisicaController.pesquisa}"/>
+						<p:commandButton value="Pesquisar" 
+							actionListener="#{pessoaFisicaController.pesquisar}"
+							process="@this itPesquisa" 
+							update="formDataTable"/>
+					</h:form>
+					<p:panel styleClass="card no-border" toggleable="true"
+						toggleSpeed="300">
+						<h:form id="formDataTable">
+							<p:dataTable styleClass="box-primary" var="pessoa"
+								value="#{pessoaFisicaController.listaPessoa}">
+								<f:facet name="header">
+									<h:outputText value="Lista de Pessoas Cadastradas" />
+								</f:facet>
+								<p:column headerText="Id">
+									<h:outputText value="#{pessoa.id}" />
+								</p:column>
+			
+								<p:column headerText="Nome">
+									<p:commandLink value="#{pessoa.nome}" 
+											oncomplete="PF('dlg').hide();">
+										<f:ajax render="formDados" execute="@this" />
+										<f:setPropertyActionListener value="#{pessoa}"
+											target="#{pessoaFisicaController.entity}" />
+									</p:commandLink>
+								</p:column>
+			
+								<p:column headerText="Data de Nascimento">
+									<h:outputText value="#{pessoa.dataNascimento}">
+										<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" locale="pt_BR" />
+									</h:outputText>
+								</p:column>
+			
+								<p:column headerText="Endereço">
+									<h:outputText value="#{pessoa.endereco}" />
+								</p:column>
+			
+								<p:column headerText="Email">
+									<h:outputText value="#{pessoa.email}" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:panel>
+				</p:dialog>				
+				
+			</div>
+		
+		</ui:define>
+	</ui:composition>	
+</html>

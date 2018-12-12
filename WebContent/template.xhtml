@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   
+	<h:outputStylesheet name="css/styleTemplateTeste.css"/>  
+    
+</h:head>
+
+
+
+<h:body>
+	
+	 <div class="wrapper">
+	 	<div class="box header">
+			<h1 >Sistema WEBGYM</h1>
+			 <div style="text-align: right;">
+				<h:form>
+					<h:outputLabel value="Olá #{templateController.usuarioLogado.login}"/>
+					<h:commandLink value=" (Sair)" 
+						action="#{templateController.encerrarSessao}"
+						style="color:white"/>
+				</h:form>
+			</div>
+	 	</div>
+		<div class="box sidebar" style="text-align: north;">
+			<ui:insert name="menu">			
+			<ul>
+				<li class="selected-item"><a>Início</a></li>	
+				<li><a href="/WebGym/pages/cadastrocidade.xhtml">Cadastrar cidade</a></li>	
+				<li><a href="/WebGym/pages/cadastropessoafisica.xhtml">Cadastrar(Aluno/instrutor)</a></li>
+				<li><a href="/WebGym/pages/cadastroaluno.xhtml">Alunos</a></li>
+				<li><a href="/WebGym/pages/cadastroinstrutor.xhtml">Instrutor</a></li>
+				<li><a href="/WebGym/pages/cadastrotreino.xhtml">Treino</a></li>
+				<li><a href="/WebGym/pages/cadastroavaliacao.xhtml">Avaliação</a></li>
+				<li><a href="/WebGym/pages/cadastromensalidade.xhtml">Mensalidade</a></li>
+				<li><a href="/WebGym/pages/cadastroequipamento.xhtml">Equipamento</a></li>
+				<li><a href="/WebGym/pages/cadastroexercicio.xhtml">Exercicios</a></li>
+			</ul>
+			</ui:insert>
+		</div>
+		
+		<div class="box content">
+			<ui:insert name="conteudo">
+				
+			</ui:insert>
+		</div>
+		
+		<div class="box footer" style="text-align: center;">
+			<h:outputText value="2018 - WEBGYM - Todos os direitos reservados." />
+		</div>
+	</div>
+	
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+     	<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+</h:body>
+</html>

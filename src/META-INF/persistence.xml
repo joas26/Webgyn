@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="WebGym">
+	
+	<class>br.unitins.webgyn.model.Aluno</class>
+		<class>br.unitins.webgyn.model.Avaliacao</class>
+		<class>br.unitins.webgyn.model.Cep</class>
+		<class>br.unitins.webgyn.model.Cidade</class>
+		<class>br.unitins.webgyn.model.DefaultEntity</class>
+		<class>br.unitins.webgyn.model.Endereco</class>
+		<class>br.unitins.webgyn.model.Equipamento</class>
+		<class>br.unitins.webgyn.model.Exercicio</class>
+		<class>br.unitins.webgyn.model.Instrutor</class>
+		<class>br.unitins.webgyn.model.Mensalidade</class>
+		<class>br.unitins.webgyn.model.Pessoa</class>
+		<class>br.unitins.webgyn.model.PessoaFisica</class>
+		<class>br.unitins.webgyn.model.Telefone</class>
+		<class>br.unitins.webgyn.model.Treino</class>
+	
+	
+	<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/WebGymDB?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=UTF-8" />
+				
+			<property name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+				
+			<property name="javax.persistence.jdbc.user"
+				value="topicos2" />
+				
+			<property name="javax.persistence.jdbc.password"
+				value="123456" />
+		
+	<!--	
+			<property name="eclipselink.ddl-generation"
+				value="drop-and-create-tables" />
+					-->
+				
+			 <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+				
+
+			<property name="eclipselink.logging.level" value="ALL" />
+		
+		</properties>
+	
+	</persistence-unit>
+</persistence>

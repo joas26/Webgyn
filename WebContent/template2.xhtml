@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<title>WebGYN - Template</title>
+	<h:outputStylesheet name="css/styles.css" />
+
+</h:head>
+
+<h:body>
+
+	<section id="body" class="width"> <aside id="sidebar"
+		class="column-left"> <header>
+	<h1>
+		<a href="#">webgyn</a>
+	</h1>
+
+	<h2>Bem-vindo ao meu website!</h2>
+
+	</header> <nav id="mainnav">
+	<ul>
+		<li class="selected-item"><a href="cadastroinstrutor.xhtml">Início</a></li>
+		<li><a href="cadastroAluno.xhtml">Alunos</a></li>
+		<li><a href="#">Avaliação</a></li>
+		<li><a href="#">Mensalidade</a></li>
+		<li><a href="#">Treino</a></li>
+	</ul>
+	
+	</nav> 
+	
+	</aside> 
+	<section id="content" class="column-right">
+	
+	<!-- UNIDADE DE LAYOUT QUE FICARÁ NA POSIÇÃO CENTRAL DA PÁGINA--> 
+	<p:layoutUnit position="center">
+		<!-- CHAMANDO O CONTEÚDO -->
+		<ui:insert name="conteudo" />
+
+
+	</p:layoutUnit> 
+	
+	
+	<!-- UNIDADE DE LAYOUT QUE FICARÁ NA POSIÇÃO INFERIOR DA PÁGINA OU "SUL", ONDE FICARÁ O RODAPÉ -->
+	<p:layoutUnit position="south" styleClass="rodape">
+		<footer class="footer">
+		<div class="footer-bottom">
+			<p class="text-center">
+				Desenvolvido por <a href="https://github.com/joas26"> Joás Castro </a> e <a href="https://github.com/scharlessouza"> Scharles Souza </a>
+			</p>
+			<p class="text-center">
+				<a href="#"> Voltar para o topo</a>
+			</p>
+		</div>
+		</footer>
+	</p:layoutUnit> 
+	
+	
+	
+	<!-- Bootcamp JavaScript --> <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script> <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script> <script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+		
+		
+		</section>
+
+		<div class="clear"></div>
+
+	</section>
+		
+</h:body>
+
+</html>

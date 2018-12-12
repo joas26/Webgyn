@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/template.xhtml">
+	<ui:define name="conteudo">
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+		<div style="position: absolute; top: 100px; left: 80%">
+			<p:growl>
+				<p:autoUpdate disabled="false" />
+			</p:growl>
+		</div>
+		<h2 class="align-center">.: Cadastro de treino :.</h2>
+		<div class="ui-g-12">
+			<p:panel styleClass="card no-border" toggleable="true"
+				toggleSpeed="300">
+
+				<h:form id="formDados">
+
+					<div style="text-align: left;"
+						class="ui-fluid #{layoutMB.flat ? 'ui-flat':''} ">
+						<p:panelGrid id="pgDados" columns="2"
+							columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+							styleClass="ui-fluid card">
+
+							<h:panelGroup>
+
+
+								<p:commandLink for="itNome" value="Nome:"
+									onclick="PF('dlg').show();" process="@this"
+									style="color:blue; text-decoration: underline;">
+
+									<p:ajax event="dialogReturn"
+										listener="#{alunoController.pessoaFisicaSelecionada}"
+										update="itNome" />
+								</p:commandLink>
+
+								<p:inputText id="itNome"
+									value="#{treinoController.entity.aluno.nome}"
+									required="true">
+									<p:focus for="itNome" />
+								</p:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+									<p:outputLabel value="Dia da Semana:"/>
+									<p:selectOneMenu value="#{treinoController.entity.dia}">
+										<f:selectItem itemLabel="Selecione ...." itemValue=""/>
+										<f:selectItems value="#{treinoController.vetorDia}"
+												var="dia" itemLabel="#{dia.label}" itemValue="#{dia}"/>
+									</p:selectOneMenu>
+									
+							</h:panelGroup>
+
+
+
+							<h:panelGroup>
+								<h:panelGrid id="panelExercicio" columns="2"
+									columnClasses="ui-grid-col-2, ui-grid-col-4" layout="grid">
+
+									
+								<h:panelGroup>
+									<p:outputLabel value="Exercicios:"/>
+									<p:selectOneMenu value="#{treinoController.exercicio}" >
+										<f:selectItem itemLabel="Selecione...." itemValue=""/>
+										<f:selectItems value="#{treinoController.listaExercicio}"
+												var="exercicio" 
+												itemLabel="#{exercicio.nome}" 
+												itemValue="#{exercicio}"/>
+									</p:selectOneMenu>
+								</h:panelGroup>
+									
+									
+									
+								</h:panelGrid>
+
+								<h:panelGroup>
+									<p:spacer />
+									<p:commandButton value="Adicionar"
+										actionListener="#{treinoController.adicionarExercicio}"
+										update="panelExercicio dtExercicio"
+										process="@this panelExercicio" />
+								</h:panelGroup>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<p:dataTable id="dtExercicio" styleClass="box-primary" var="exercicio"
+									value="#{treinoController.entity.listaExercicio}">
+									<f:facet name="header">
+										<h:outputText value="Lista de Exercicio" />
+									</f:facet>
+									<p:column headerText="Nome">
+										<h:outputText value="#{exercicio.nome}" />
+									</p:column>
+									
+									<p:column>
+										<p:commandLink value="Remover"
+											actionListener="#{treinoController.removerExercicio(exercicio)}"
+											update="dtExercicio" process="@this" />
+									</p:column>
+								</p:dataTable>
+
+							</h:panelGroup>
+							<p:spacer />
+						</p:panelGrid>
+					</div>
+
+					<p:spacer />
+
+					<p:panelGrid columns="5" style="text-align: center;"
+						columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+						layout="grid" styleClass="ui-fluid  ">
+
+						<p:commandButton value="Incluir"
+							styleClass="btn-primary btn-block"
+							disabled="#{treinoController.entity.id != null}"
+							actionListener="#{treinoController.incluir}"
+							update="@form formDataTable" process="@this pgDados" />
+
+						<p:commandButton value="Alterar"
+							styleClass="btn-primary btn-block"
+							disabled="#{treinoController.entity.id == null}"
+							actionListener="#{treinoController.alterar}"
+							update="@form formDataTable" process="@this pgDados" />
+
+						<p:commandButton value="Excluir"
+							styleClass="btn-primary btn-block"
+							disabled="#{treinoController.entity.id == null}"
+							actionListener="#{treinoController.remover}"
+							update="@form formDataTable" process="@this pgDados">
+							<p:confirm header="Confirmação"
+								message="Deseja realmente excluir?" icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:commandButton value="Limpar" styleClass="btn-primary btn-block"
+							actionListener="#{treinoController.limpar}"
+							update="@form formDataTable" process="@this" />
+							
+							<p:commandButton value="Consultar" styleClass="btn-primary btn-block"
+							actionListener="#{treinoController.consultar}"
+							update="@form formDados" process="@this" />
+							
+					</p:panelGrid>
+
+
+
+				</h:form>
+
+			</p:panel>
+			<p:spacer />
+
+			<p:dialog header="Pesquisa de Pessoas" appendTo="@(body)"
+				widgetVar="dlg" modal="true" height="400" closeOnEscape="true">
+				<h:form>
+					<p:inputText id="itPesquisa"
+						value="#{pessoaFisicaController.pesquisa}" />
+					<p:commandButton value="Pesquisar"
+						actionListener="#{pessoaFisicaController.pesquisar}"
+						process="@this itPesquisa" update="formDataTable" />
+				</h:form>
+				<p:panel styleClass="card no-border" toggleable="true"
+					toggleSpeed="300">
+					<h:form id="formDataTable">
+						<p:dataTable styleClass="box-primary" var="pessoa"
+							value="#{pessoaFisicaController.listaPessoa}">
+							<f:facet name="header">
+								<h:outputText value="Lista de Pessoas Cadastradas" />
+							</f:facet>
+							<p:column headerText="Id">
+								<h:outputText value="#{pessoa.id}" />
+							</p:column>
+
+							<p:column headerText="Nome">
+								<p:commandLink value="#{pessoa.nome}"
+									oncomplete="PF('dlg').hide();">
+									<f:ajax render="formDados" execute="@this"
+										update="itNome itMatricula" />
+									<f:setPropertyActionListener value="#{pessoa}"
+										target="#{treinoController.entity.aluno}" />
+
+
+								</p:commandLink>
+							</p:column>
+
+							<p:column headerText="Data de Nascimento">
+								<h:outputText value="#{pessoa.dataNascimento}">
+									<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" locale="pt_BR" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Endereço">
+								<h:outputText value="#{pessoa.endereco}" />
+							</p:column>
+
+							<p:column headerText="Email">
+								<h:outputText value="#{pessoa.email}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:panel>
+			</p:dialog>
+
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>
